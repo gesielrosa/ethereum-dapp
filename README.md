@@ -1,4 +1,4 @@
-# Ethereum DApp
+# Ethereum - Smart Contract - DApp
 
 Load and interact with any Ethereum Smart Contract (MetaMask)
 
