@@ -1,0 +1,38 @@
+button {
+  padding: 8px 16px;
+  margin: 2px 2px;
+  border: 0;
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: var(--light);
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.btn-transparent {
+    background-color: transparent;
+
+    &--primary {
+      background-color: transparent;
+      color: var(--primary);
+    }
+
+    &--secondary {
+      background-color: transparent;
+      color: var(--secondary);
+    }
+
+  }
+}

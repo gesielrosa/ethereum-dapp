@@ -1,0 +1,89 @@
+<div class="container">
+  <ng-container *ngIf="!isInstalled(); else content">
+    <button (click)="installMetaMask()">Install MetaMask</button>
+  </ng-container>
+  <ng-template #content>
+    <div class="d-flex mb-3">
+      <button (click)="connectMetaMask()" *ngIf="!isConnected()">Connect with MetaMask</button>
+      <button class="btn-transparent--secondary ms-auto" (click)="metamaskInfo()" [disabled]="!isConnected()">
+        <i class="fas fa-sync-alt"></i>
+        Update Infos
+      </button>
+    </div>
+    <ng-container *ngIf="isConnected()">
+      <div class="row g-0 p-3 pt-3 mt-3 mb-3 bg-dark2 rounded">
+        <div class="col-12 col-md-6">
+          <h6>Selected Account:</h6>
+          <p class="text-secondary">{{infos?.selectedAccount || '--'}}</p>
+        </div>
+        <div class="col-12 col-md-6">
+          <h6>Chain Info:</h6>
+          <p class="text-secondary">
+            <ng-container *ngIf="infos?.chainInfo?.name; else noChain">
+              {{infos?.chainInfo?.name}} (id: {{infos?.chainInfo?.decimal}})
+            </ng-container>
+            <ng-template #noChain>--</ng-template>
+          </p>
+        </div>
+      </div>
+      <div class="row g-1 p-3 pt-3 mt-3 mb-3 bg-dark2 rounded align-items-center">
+        <div class="col-12">
+          <h6 class="cursor-pointer" (click)="toggleContractAbiInput()">
+            Contract ABI
+            <span class="text-secondary ms-2">
+              <ng-container *ngIf="contractAbiCollapsed"><i class="fas fa-chevron-up"></i></ng-container>
+              <ng-container *ngIf="!contractAbiCollapsed"><i class="fas fa-chevron-down"></i></ng-container>
+            </span>
+          </h6>
+        </div>
+        <ng-container *ngIf="!contractAbiCollapsed">
+          <div class="col-12">
+            <div class="text-end mb-2">
+              <a class="text-primary cursor-pointer me-4" (click)="preloadContract('rhz')">Preload RHZ Contract</a>
+              <a class="text-primary cursor-pointer" (click)="preloadContract('mco2')">Preload MCO2 contract</a>
+            </div>
+            <textarea class="w-100" rows="5" name="abi" type="text" [(ngModel)]="infos.contractAbi"></textarea>
+          </div>
+          <div class="col-6 col-md-4">
+            <input class="w-100" placeholder="contract address" type="text" [(ngModel)]="infos.contractAddress">
+          </div>
+          <div class="col-6 col-md-4">
+            <input class="w-100" placeholder="chain id" type="number" [(ngModel)]="infos.contractChain">
+          </div>
+          <div class="col-12 col-md-4 text-end">
+            <button (click)="initContract()"
+                    [disabled]="!isConnected()
+                    || !infos.selectedAccount
+                    || !infos.contractAbi
+                    || !infos.contractAddress
+                    || !infos.contractChain
+                    || (infos.contractChain !== infos?.chainInfo?.decimal)">
+              Init contract
+            </button>
+          </div>
+          <div class="col-12 text-end pt-3" *ngIf="infos.contractChain && infos.contractChain !== infos?.chainInfo?.decimal">
+            <span class="text-warning">
+              Change network to {{getChainName(infos.contractChain)}} (id: {{infos.contractChain}}) on MetaMask
+            </span>
+          </div>
+        </ng-container>
+      </div>
+      <div class="row mt-5 pb-5" *ngIf="contract">
+        <div class="col-12 col-md-6">
+          <h5 class="mb-4 pb-3 border-bottom border-secondary">Read</h5>
+          <ng-container *ngFor="let abi of contractReadFunctions">
+            <app-contract-input [abi]="abi" [contract]="contract"
+                                [account]="infos.selectedAccount"></app-contract-input>
+          </ng-container>
+        </div>
+        <div class="col-12 col-md-6 mt-5 mt-md-0">
+          <h5 class="mb-4 pb-3 border-bottom border-secondary">Write</h5>
+          <ng-container *ngFor="let abi of contractWriteFunctions">
+            <app-contract-input [abi]="abi" [contract]="contract"
+                                [account]="infos.selectedAccount"></app-contract-input>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

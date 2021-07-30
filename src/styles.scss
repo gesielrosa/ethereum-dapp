@@ -1,0 +1,18 @@
+$theme-colors: (
+  "primary": #005f6e,
+  "secondary": #f0b7a1,
+  "success": #98ba50,
+  "info": #4da9cd,
+  "warning": #dc9823,
+  "danger": #cd103c,
+  "light": #F1F1F1,
+  "dark": #002332,
+  "dark2": #003241,
+  "dark3": #004150
+);
+
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~bootstrap/scss/bootstrap";
+@import "styles/main";
+@import "styles/buttons";
+@import "styles/inputs";

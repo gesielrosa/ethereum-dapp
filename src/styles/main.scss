@@ -1,0 +1,38 @@
+:root {
+  --dark: #002332;
+  --dark2: #003241;
+  --dark3: #004150;
+  --light: #F1F1F1;
+  --primary: #005f6e;
+  --secondary: #f0b7a1;
+}
+
+html, body {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--dark);
+  color: var(--light);
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-weight: normal;
+  line-height: initial;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}

@@ -1,0 +1,26 @@
+<div class="mb-4 p-3 bg-dark2 rounded">
+  <form #f="ngForm">
+    <div class="text-secondary mb-2">
+      {{abi.name}}<span *ngIf="abi.outputs.length > 0">:</span>
+      <span class="text-light" *ngFor="let input of abi?.outputs">
+        {{input?.type}}
+      </span>
+    </div>
+    <div class="mb-2">
+      <ng-container *ngFor="let input of abi?.inputs">
+        <input [placeholder]="input?.name + ' (' + input?.type + ')'" required type="text" [name]="input.name" [(ngModel)]="inputs[input.name]">
+      </ng-container>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="text-info" *ngIf="loading">Waiting...</span>
+      <button class="ms-auto"
+              type="submit"
+              (click)="call()"
+              [disabled]="loading || !contract || (abi?.inputs.length > 0 ? (f.invalid || f.pristine) : false)">
+        &raquo;
+      </button>
+    </div>
+  </form>
+  <div class="p-2 mt-3 bg-dark3 text-danger rounded result" *ngIf="error" [innerHTML]="error | prettyJson"></div>
+  <div class="p-2 mt-3 bg-dark3 rounded result" *ngIf="result | json" [innerHTML]="result | prettyJson"></div>
+</div>
