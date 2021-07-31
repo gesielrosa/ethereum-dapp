@@ -44,5 +44,15 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "process": "^0.11.10",
     "typescript": "~4.2.3"
-  }
+  },
+  "keywords": [
+    "Ethereum",
+    "Smart Contract",
+    "Decentralized app",
+    "DApp",
+    "Web3.js",
+    "MetaMask",
+    "@truffle/contract",
+    "Angular 12"
+  ]
 }
