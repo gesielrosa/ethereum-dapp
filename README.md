@@ -24,4 +24,4 @@ Run `npm run  build` to build the project. The build artifacts will be stored in
 
 `Ethereum` `Smart Contract` `Decentralized app` `DApp` `Web3.js` `MetaMask` `@truffle/contract` `Angular 12`
 
-### @gesielrosa
+[@gesielrosa](https://github.com/gesielrosa/)
